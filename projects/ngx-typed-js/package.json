@@ -9,5 +9,9 @@
     "@angular/core": ">=9.0.0"
   },
   "license": "MIT",
-  "keywords": ["typed", "typed.js", "typewriter"]
+  "keywords": [
+    "typed",
+    "typed.js",
+    "typewriter"
+  ]
 }
