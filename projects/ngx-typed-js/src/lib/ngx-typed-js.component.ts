@@ -7,9 +7,15 @@ import Typed, {TypedOptions} from 'typed.js';
   styleUrls: ['ngx-typed-js.component.css']
 })
 export class NgxTypedJsComponent implements AfterViewInit {
-  @Input()  cursorColor?: string;
 
-  @Input()  strings?: string[];
+  private _strings?: string[];
+
+  @Input()
+  get strings(): string[] { return this._strings; }
+  set strings(strings: string[]) { this._strings = strings; }
+
+
+  @Input()  cursorColor?: string;
   @Input()   stringsElement?: string;
   @Input()   typeSpeed?: number;
   @Input()   startDelay?: number;
@@ -41,7 +47,7 @@ export class NgxTypedJsComponent implements AfterViewInit {
   @Output()   destroyed: EventEmitter<void> = new EventEmitter<void>();
 
     typed: Typed;
-  @ViewChild('wrapper', { static: true })   content;
+  @ViewChild('wrapper')   content;
 
   ngAfterViewInit(): void {
     this.typed = new Typed(
@@ -82,7 +88,7 @@ export class NgxTypedJsComponent implements AfterViewInit {
       = (emitter: EventEmitter<number>) => (index: number) => emitter.emit(index);
 
     const opts = {
-      strings: this.strings,
+      strings: this._strings,
       stringsElement: this.stringsElement,
       typeSpeed: this.typeSpeed,
       startDelay: this.startDelay,
